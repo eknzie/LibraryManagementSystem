@@ -1,0 +1,12 @@
+com/library/model/BookStatus.class
+com/library/model/Loan.class
+com/library/model/BookCopy.class
+com/library/dao/StudentDAO.class
+com/library/util/HibernateUtil.class
+com/library/model/Student.class
+com/library/dao/LoanDAO.class
+com/library/dao/BookDAO.class
+com/library/service/LibraryService.class
+com/library/dao/BookCopyDAO.class
+com/library/ui/LibraryManagementApp.class
+com/library/model/Book.class

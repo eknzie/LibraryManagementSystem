@@ -1,0 +1,12 @@
+/Users/kenzielam/Documents/GitHub/LibraryManagementSystem/src/main/java/com/library/util/HibernateUtil.java
+/Users/kenzielam/Documents/GitHub/LibraryManagementSystem/src/main/java/com/library/model/Book.java
+/Users/kenzielam/Documents/GitHub/LibraryManagementSystem/src/main/java/com/library/model/Loan.java
+/Users/kenzielam/Documents/GitHub/LibraryManagementSystem/src/main/java/com/library/ui/LibraryManagementApp.java
+/Users/kenzielam/Documents/GitHub/LibraryManagementSystem/src/main/java/com/library/dao/BookCopyDAO.java
+/Users/kenzielam/Documents/GitHub/LibraryManagementSystem/src/main/java/com/library/dao/LoanDAO.java
+/Users/kenzielam/Documents/GitHub/LibraryManagementSystem/src/main/java/com/library/model/BookCopy.java
+/Users/kenzielam/Documents/GitHub/LibraryManagementSystem/src/main/java/com/library/model/BookStatus.java
+/Users/kenzielam/Documents/GitHub/LibraryManagementSystem/src/main/java/com/library/dao/BookDAO.java
+/Users/kenzielam/Documents/GitHub/LibraryManagementSystem/src/main/java/com/library/dao/StudentDAO.java
+/Users/kenzielam/Documents/GitHub/LibraryManagementSystem/src/main/java/com/library/service/LibraryService.java
+/Users/kenzielam/Documents/GitHub/LibraryManagementSystem/src/main/java/com/library/model/Student.java
