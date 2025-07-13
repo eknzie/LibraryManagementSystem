@@ -57,51 +57,103 @@ public class LoanDAO {
     
     public Loan getLoan(Long loanNumber) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.get(Loan.class, loanNumber);
+            // Eagerly fetch student and book copies with their books
+            Query<Loan> query = session.createQuery(
+                "FROM Loan l " +
+                "JOIN FETCH l.student " +
+                "LEFT JOIN FETCH l.bookCopies bc " +
+                "LEFT JOIN FETCH bc.book " +
+                "WHERE l.loanNumber = :loanNumber", 
+                Loan.class);
+            query.setParameter("loanNumber", loanNumber);
+            return query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
     
     public List<Loan> getAllLoans() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from Loan", Loan.class).list();
+            // Eagerly fetch all related entities
+            Query<Loan> query = session.createQuery(
+                "SELECT DISTINCT l FROM Loan l " +
+                "JOIN FETCH l.student " +
+                "LEFT JOIN FETCH l.bookCopies bc " +
+                "LEFT JOIN FETCH bc.book", 
+                Loan.class);
+            return query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of();
         }
     }
     
     public List<Loan> getActiveLoans() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Loan> query = session.createQuery(
-                "from Loan l where l.returnDate is null", Loan.class);
+                "SELECT DISTINCT l FROM Loan l " +
+                "JOIN FETCH l.student " +
+                "LEFT JOIN FETCH l.bookCopies bc " +
+                "LEFT JOIN FETCH bc.book " +
+                "WHERE l.returnDate IS NULL", 
+                Loan.class);
             return query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of();
         }
     }
     
     public List<Loan> getLoansByStudent(String broncoId) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Loan> query = session.createQuery(
-                "from Loan l where l.student.broncoId = :broncoId", Loan.class);
+                "SELECT DISTINCT l FROM Loan l " +
+                "JOIN FETCH l.student s " +
+                "LEFT JOIN FETCH l.bookCopies bc " +
+                "LEFT JOIN FETCH bc.book " +
+                "WHERE s.broncoId = :broncoId", 
+                Loan.class);
             query.setParameter("broncoId", broncoId);
             return query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of();
         }
     }
     
     public List<Loan> getOverdueLoans() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Loan> query = session.createQuery(
-                "from Loan l where l.returnDate is null and l.dueDate < :currentDate", 
+                "SELECT DISTINCT l FROM Loan l " +
+                "JOIN FETCH l.student " +
+                "LEFT JOIN FETCH l.bookCopies bc " +
+                "LEFT JOIN FETCH bc.book " +
+                "WHERE l.returnDate IS NULL AND l.dueDate < :currentDate", 
                 Loan.class);
             query.setParameter("currentDate", LocalDate.now());
             return query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of();
         }
     }
     
     public List<Loan> getLoansByDateRange(LocalDate startDate, LocalDate endDate) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Loan> query = session.createQuery(
-                "from Loan l where l.borrowingDate between :startDate and :endDate", 
+                "SELECT DISTINCT l FROM Loan l " +
+                "JOIN FETCH l.student " +
+                "LEFT JOIN FETCH l.bookCopies bc " +
+                "LEFT JOIN FETCH bc.book " +
+                "WHERE l.borrowingDate BETWEEN :startDate AND :endDate", 
                 Loan.class);
             query.setParameter("startDate", startDate);
             query.setParameter("endDate", endDate);
             return query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of();
         }
     }
 }
