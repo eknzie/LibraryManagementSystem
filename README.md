@@ -73,18 +73,3 @@ mvn javafx:run
 - Students with overdue books cannot borrow new items
 - All books in a loan must be returned together
 
-## Project Structure
-
-```
-src/
-├── main/java/com/library/
-│   ├── dao/           # Database access layer
-│   ├── model/         # Entity classes
-│   ├── service/       # Business logic
-│   ├── ui/            # JavaFX user interface
-│   └── util/          # Hibernate configuration
-└── main/resources/
-    └── hibernate.cfg.xml
-```
-
-The application uses Hibernate to automatically create database tables on first run.
